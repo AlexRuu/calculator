@@ -11,17 +11,20 @@ const signs = document.querySelectorAll('.btn-operator');
 const equal = document.querySelector('.btn-equal');
 const equation = document.querySelector('.history');
 const clear = document.querySelector('#clear');
+const del = document.querySelector('#del');
 
 // Operating page
 updateDisplay();
 
 signs.forEach((button) => {
     button.addEventListener('click', () => {
-        operator = button.value;
-        past = display.join('')
-        equation.innerText = `${past} ${operator}`
-        current.innerHTML = ''
-        display = [];
+        if (button.value != '%') {
+            operator = button.value;
+            past = display.join('')
+            equation.innerText = `${past} ${operator}`
+            current.innerHTML = ''
+            display = [];
+        };
     });
 });
 
@@ -31,11 +34,13 @@ if (display != [] && past != "") {
         current.innerText = solution;
         equation.innerText = `${past} ${operator} ${display.join('')}`
         display = [];
+        operator = '';
         past = '';
     };
 };
 
 clear.onclick = () => clearAll();
+del.onclick = () => backspace();
 
 // Functions
 // Calculate function
@@ -77,3 +82,8 @@ function clearAll() {
     current.innerText = '';
     equation.innerText = '';
 };
+
+function backspace() {
+    display.pop();
+    current.innerText = display.join('');
+}
