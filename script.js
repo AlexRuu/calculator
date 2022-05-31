@@ -1,8 +1,8 @@
 // Global variables
 var display = [];
-var past;
+var past = '';
 var operator;
-var solution;
+var solution = '';
 
 // DOM elements
 const numbers = document.querySelectorAll('.btn-num');
@@ -20,25 +20,35 @@ signs.forEach((button) => {
     button.addEventListener('click', () => {
         if (button.value != '%') {
             operator = button.value;
-            past = display.join('')
-            equation.innerText = `${past} ${operator}`
-            current.innerHTML = ''
+            past = display.join('');
+            equation.innerText = `${past} ${operator}`;
+            current.innerHTML = '';
             display = [];
+        };
+        if (solution != '') {
+            operator = button.value;
+            past = solution;
+            equation.innerHTML = `${solution} ${operator}`;
         };
     });
 });
 
-if (display != [] && past != "") {
-    equal.onclick = () => {
+equal.onclick = () => {
+    if (past != '') {
         operate(operator, parseFloat(past), parseFloat(display.join('')));
         current.innerText = solution;
         equation.innerText = `${past} ${operator} ${display.join('')}`
         display = [];
         operator = '';
         past = '';
+    }
+    else {
+        current.innerText = display.join('')
     };
 };
 
+
+// Clear and delete buttons
 clear.onclick = () => clearAll();
 del.onclick = () => backspace();
 
@@ -77,12 +87,13 @@ function updateDisplay() {
 function clearAll() {
     display = [];
     past = '';
-    solution = '';
+    solution = 0;
     operator = '';
     current.innerText = '';
     equation.innerText = '';
 };
 
+// Delete last digit
 function backspace() {
     display.pop();
     current.innerText = display.join('');
