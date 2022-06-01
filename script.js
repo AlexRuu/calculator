@@ -18,17 +18,25 @@ updateDisplay();
 
 signs.forEach((button) => {
     button.addEventListener('click', () => {
-        if (button.value != '%') {
+        if (button.value !== '%') {
             operator = button.value;
             past = display.join('');
             equation.innerText = `${past} ${operator}`;
             current.innerHTML = '';
             display = [];
-        };
-        if (solution != '') {
+            if (solution != '') {
+                operator = button.value;
+                past = solution;
+                equation.innerHTML = `${solution} ${operator}`;
+            };
+        } 
+        
+        else if (button.value === '%') {
             operator = button.value;
-            past = solution;
-            equation.innerHTML = `${solution} ${operator}`;
+            past = display;
+            solution = percentage(display.join(''));
+            equation.innerText = `${past} ${operator}`;
+            current.innerHTML = solution;
         };
     });
 });
@@ -97,4 +105,9 @@ function clearAll() {
 function backspace() {
     display.pop();
     current.innerText = display.join('');
+}
+
+// Percentage 
+function percentage(value) {
+    return value * 0.01;
 }
