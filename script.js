@@ -39,7 +39,12 @@ function updateDisplay() {
             else {
                 display += button.value;
             }
-            screen.innerText = display;
+            if (display.length >= 9) {
+                screen.innerText = display.substring(0, 9);
+            }
+            else {
+                screen.innerText = display;
+            }
         });
     });
 };
