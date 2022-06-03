@@ -13,6 +13,7 @@ const clear = document.querySelector('#clear');
 
 // Page operation
 updateDisplay();
+
 change.onclick = () => {
     changeSign(display);
 };
@@ -48,15 +49,12 @@ function updateDisplay() {
             if (display === 0) {
                 display = button.value;
             }
-            else {
+            else if (display.length < 9) {
                 display += button.value;
-            }
-            if (display.length >= 9) {
-                screen.innerText = display.substring(0, 9);
-            }
-            else {
-                screen.innerText = display;
             };
+            if (display.length <= 9) {
+                screen.innerText = display;
+            }
         });
     });
 };
