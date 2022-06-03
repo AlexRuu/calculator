@@ -8,9 +8,13 @@ var solution;
 const number = document.querySelectorAll('.btn-num');
 const signs = document.querySelectorAll('.btn-operator');
 const screen = document.querySelector('.current-number');
-
+const change = document.querySelector('#sign');
 
 updateDisplay();
+change.onclick = () => {
+    changeSign(display);
+}
+
 // Functions
 // Calculate function
 function operate(operator, num1, num2) {
@@ -47,4 +51,9 @@ function updateDisplay() {
             }
         });
     });
+};
+
+function changeSign(value) {
+    display = value * -1;
+    screen.innerText = display;
 };
