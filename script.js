@@ -85,6 +85,8 @@ function getOperator() {
 function clearAll() {
     display = 0;
     operator = null;
-    solution = null;
+    solution = 0;
+    past = 0;
     screen.innerText = display;
+    history.innerText = '';
 };
