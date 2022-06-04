@@ -1,7 +1,8 @@
 // Global variables
 var display = 0;
 var operator = null;
-var solution = null;
+var solution = 0;
+var past = 0;
 
 // DOM Elements
 const number = document.querySelectorAll('.btn-num');
@@ -9,18 +10,20 @@ const signs = document.querySelectorAll('.btn-operator');
 const screen = document.querySelector('.current-number');
 const change = document.querySelector('#sign');
 const clear = document.querySelector('#clear');
+const history = document.querySelector('.history');
+const equals = document.querySelector('.btn-equal');
 
 
 // Page operation
 updateDisplay();
-
-change.onclick = () => {
-    changeSign(display);
-};
 clear.onclick = () => clearAll();
 getOperator();
-
-
+equals.onclick = () => {
+    operate(operator, parseFloat(past), parseFloat(display));
+    history.innerText = `${past} ${operator} ${display}`;
+    display = solution;
+    screen.innerText = display;
+};
 
 // Functions
 // Calculate function
@@ -70,6 +73,10 @@ function getOperator() {
     signs.forEach((button) => {
         button.addEventListener('click', () => {
             operator = button.value;
+            past = display;
+            history.innerText = `${past} ${operator}`;
+            display = 0;
+            screen.innerText = display;
         });    
     });
 };
