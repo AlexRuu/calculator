@@ -22,7 +22,12 @@ equals.onclick = () => {
     operate(operator, parseFloat(past), parseFloat(display));
     history.innerText = `${past} ${operator} ${display}`;
     display = solution;
-    screen.innerText = display;
+    if (display.toString().length < 9) {
+        screen.innerText = display;
+    }
+    else if (display.toString().length >= 9) {
+        screen.innerText = round(display, 5);
+    };
 };
 
 // Functions
@@ -97,7 +102,6 @@ function clearAll() {
 };
 
 // Convert to scientific notation
-function round(value) {
-    
-    return Number.parseFloat(value).toExponential();
+function round(value, value2) {
+    return Number.parseFloat(value).toExponential(value2);
 };
