@@ -53,7 +53,12 @@ function updateDisplay() {
                 display = button.value;
             }
             else if (display.length < 9) {
-                display += button.value;
+                if (display.includes('.') && button.value === '.') {
+
+                }
+                else {
+                    display += button.value;
+                };
             };
             if (display.length <= 9) {
                 screen.innerText = display;
@@ -89,4 +94,10 @@ function clearAll() {
     past = 0;
     screen.innerText = display;
     history.innerText = '';
+};
+
+// Convert to scientific notation
+function round(value) {
+    
+    return Number.parseFloat(value).toExponential();
 };
