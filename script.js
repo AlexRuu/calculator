@@ -19,20 +19,13 @@ updateDisplay();
 clear.onclick = () => clearAll();
 getOperator();
 equals.onclick = () => {
-    if (operator === '%') {
-
-    }
+    if (operator === '%') {}
     else {
         operate(operator, parseFloat(past), parseFloat(display));
         history.innerText = `${past} ${operator} ${display}`;
         display = solution;
     };
-    if (display.toString().length < 9) {
-        screen.innerText = display;
-    }
-    else if (display.toString().length >= 9) {
-        screen.innerText = round(display, 5);
-    };
+    roundDisplay(display);
 };
 
 // Functions
@@ -94,12 +87,7 @@ function getOperator() {
                 solution = percent(display);
                 display = solution;
                 past = solution;
-                if (display.toString().length < 9) {
-                    screen.innerText = display;
-                }
-                else if (display.toString().length >= 9) {
-                    screen.innerText = round(display, 5);
-                };
+                roundDisplay(display);
             }
             else {
                 display = 0;
@@ -127,4 +115,14 @@ function round(value, value2) {
 // Percentage button 
 function percent(number) {
     return number / 100;
+};
+
+// Display gets displayed in scientific notation if above 9 characters
+function roundDisplay(number) {
+    if (number.toString().length < 9) {
+        screen.innerText = number;
+    }
+    else if (number.toString().length >= 9) {
+        screen.innerText = round(number, 4);
+    };
 };
