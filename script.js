@@ -12,10 +12,10 @@ const negative = document.querySelector('#sign');
 const clear = document.querySelector('#clear');
 const history = document.querySelector('.history');
 const equals = document.querySelector('.btn-equal');
+const errorMessage = "Divide by 0"
 
 // Page operation
 updateDisplay();
-negativeActive();
 clear.onclick = () => clearAll();
 getOperator();
 equals.onclick = () => {
@@ -54,7 +54,11 @@ function operate(operator, num1, num2) {
         case 'x':
             solution = num1 * num2;
             return solution;
-        case '÷':
+        case '/':
+            if (num2 === 0) {
+                solution = errorMessage;
+                return solution;
+            }
             solution = num1 / num2;
             return solution;
     };
@@ -134,18 +138,10 @@ function roundDisplay(number) {
     if (number.toString().length < 9) {
         screen.innerText = number;
     }
+    else if (number === errorMessage){
+        screen.innerText = number;
+    }
     else if (number.toString().length >= 9) {
         screen.innerText = round(number, 4);
-    };
-};
-
-function negativeActive() {
-    negative.addEventListener('click', () => {
-        if (negative.classList.contains('active')) {
-            negative.classList.remove('active');
-        }
-        else {
-            negative.classList += ' active';
-        };
-    });
+    }
 };
