@@ -15,6 +15,7 @@ const equals = document.querySelector('.btn-equal');
 
 // Page operation
 updateDisplay();
+negativeActive();
 clear.onclick = () => clearAll();
 getOperator();
 equals.onclick = () => {
@@ -26,12 +27,13 @@ equals.onclick = () => {
         operate(operator, parseFloat(past), parseFloat(display));
         history.innerText = `${past} ${operator} ${display}`;
         display = solution;
+        operator = null;
     };
     roundDisplay(display);
 };
 number.forEach((button) => {
     button.addEventListener('click', () => {
-        if (solution != null) {
+        if (solution != null && operator === null) {
             clearAll();
             display = button.value;
             screen.innerText = display;
@@ -139,11 +141,11 @@ function roundDisplay(number) {
 
 function negativeActive() {
     negative.addEventListener('click', () => {
-        if (!negative.classList.contains('active')) {
-            negative.classList.add('active');
+        if (negative.classList.contains('active')) {
+            negative.classList.remove('active');
         }
         else {
-            negative.classList.remove('active');
+            negative.classList += ' active';
         };
     });
 };
