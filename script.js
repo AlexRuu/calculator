@@ -1,18 +1,17 @@
 // Global variables
 var display = 0;
 var operator = null;
-var solution = 0;
-var past = 0;
+var solution = null;
+var past = null;
 
 // DOM Elements
 const number = document.querySelectorAll('.btn-num');
 const signs = document.querySelectorAll('.btn-operator');
 const screen = document.querySelector('.current-number');
-const change = document.querySelector('#sign');
+const negative = document.querySelector('#sign');
 const clear = document.querySelector('#clear');
 const history = document.querySelector('.history');
 const equals = document.querySelector('.btn-equal');
-
 
 // Page operation
 updateDisplay();
@@ -20,6 +19,9 @@ clear.onclick = () => clearAll();
 getOperator();
 equals.onclick = () => {
     if (operator === '%') {}
+    else if (operator === null) {
+
+    }
     else {
         operate(operator, parseFloat(past), parseFloat(display));
         history.innerText = `${past} ${operator} ${display}`;
@@ -27,6 +29,15 @@ equals.onclick = () => {
     };
     roundDisplay(display);
 };
+number.forEach((button) => {
+    button.addEventListener('click', () => {
+        if (solution != null) {
+            clearAll();
+            display = button.value;
+            screen.innerText = display;
+        };
+    })
+})
 
 // Functions
 // Calculate function
@@ -65,15 +76,14 @@ function updateDisplay() {
             };
             if (display.length <= 9) {
                 screen.innerText = display;
-            }
+            };
         });
     });
 };
 
 // Change sign of the display when button is clicked
-function changeSign(value) {
-    display = value * -1;
-    screen.innerText = display;
+function toNegative(value) {
+    return value * -1;
 };
 
 // Get operator when pressed
@@ -101,8 +111,8 @@ function getOperator() {
 function clearAll() {
     display = 0;
     operator = null;
-    solution = 0;
-    past = 0;
+    solution = null;
+    past = null;
     screen.innerText = display;
     history.innerText = '';
 };
@@ -125,4 +135,15 @@ function roundDisplay(number) {
     else if (number.toString().length >= 9) {
         screen.innerText = round(number, 4);
     };
+};
+
+function negativeActive() {
+    negative.addEventListener('click', () => {
+        if (!negative.classList.contains('active')) {
+            negative.classList.add('active');
+        }
+        else {
+            negative.classList.remove('active');
+        };
+    });
 };

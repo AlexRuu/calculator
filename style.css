@@ -62,7 +62,13 @@ p {
     gap: 10px;
 }
 
-.btn, .btn-num, .btn-operator {
+button {
+    border: none;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.btn, .btn-num, .btn-operator, .btn-negative {
     height: 75px;
     width: 75px;
     background-color: white;
@@ -75,12 +81,6 @@ p {
     text-align: center;
     align-items: center;
     background-color: #fef7f0; 
-}
-
-.btn, .btn-equal, .btn-num, .btn-operator {
-    border: none;
-    font-size: 20px;
-    border-radius: 10px;
 }
 
 button:active {
