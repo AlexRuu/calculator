@@ -68,7 +68,7 @@ button {
     border-radius: 10px;
 }
 
-.btn, .btn-num, .btn-operator, .btn-negative {
+.btn, .btn-num, .btn-operator, .btn-negative, .btn-del {
     height: 75px;
     width: 75px;
     background-color: white;
