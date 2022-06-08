@@ -146,6 +146,7 @@ function roundDisplay(number) {
     }
 };
 
+// Delete last character
 function remove() {
     delB.addEventListener('click', () => {
         display = display.slice(0, -1);
