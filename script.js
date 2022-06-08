@@ -55,7 +55,7 @@ function operate(operator, num1, num2) {
         case '-':
             solution = num1 - num2;
             return solution;
-        case 'x':
+        case '*':
             solution = num1 * num2;
             return solution;
         case '/':
