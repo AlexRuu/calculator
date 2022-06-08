@@ -3,23 +3,26 @@ var display = 0;
 var operator = null;
 var solution = null;
 var past = null;
+const errorMessage = "Divide by 0"
 
 // DOM Elements
 const number = document.querySelectorAll('.btn-num');
 const signs = document.querySelectorAll('.btn-operator');
 const screen = document.querySelector('.current-number');
-const negative = document.querySelector('#sign');
 const clear = document.querySelector('#clear');
 const history = document.querySelector('.history');
 const equals = document.querySelector('.btn-equal');
-const errorMessage = "Divide by 0"
+const delB = document.querySelector('.btn-del');
 
 // Page operation
 updateDisplay();
-clear.onclick = () => clearAll();
+remove();
 getOperator();
+clear.onclick = () => clearAll();
 equals.onclick = () => {
-    if (operator === '%') {}
+    if (operator === '%') {
+
+    }
     else if (operator === null) {
 
     }
@@ -31,6 +34,7 @@ equals.onclick = () => {
     };
     roundDisplay(display);
 };
+
 number.forEach((button) => {
     button.addEventListener('click', () => {
         if (solution != null && operator === null) {
@@ -87,11 +91,6 @@ function updateDisplay() {
     });
 };
 
-// Change sign of the display when button is clicked
-function toNegative(value) {
-    return value * -1;
-};
-
 // Get operator when pressed
 function getOperator() {
     signs.forEach((button) => {
@@ -104,6 +103,7 @@ function getOperator() {
                 display = solution;
                 past = solution;
                 roundDisplay(display);
+                operator = null;
             }
             else {
                 display = 0;
@@ -144,4 +144,11 @@ function roundDisplay(number) {
     else if (number.toString().length >= 9) {
         screen.innerText = round(number, 4);
     }
+};
+
+function remove() {
+    delB.addEventListener('click', () => {
+        display = display.slice(0, -1);
+        screen.innerText = display;
+    });
 };
