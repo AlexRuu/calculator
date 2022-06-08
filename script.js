@@ -73,10 +73,10 @@ function updateDisplay() {
     screen.innerText = display;
     number.forEach((button) => {
         button.addEventListener('click', () => {
-            if (display === 0) {
+            if (parseFloat(display) === 0) {
                 display = button.value;
             }
-            else if (display.length < 9) {
+            else if (display.length < 9 ) {
                 if (display.includes('.') && button.value === '.') {
 
                 }
